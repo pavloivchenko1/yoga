@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import yoga;
+import yoga
+import CoreGraphics
+
 postfix operator %
 
 extension Int {
