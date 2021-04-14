@@ -1,0 +1,14 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "swiftTargetMap" : {
+    "C.YogaKit-debug.module" : "YogaKit"
+  },
+  "testDiscoveryCommands" : {
+
+  }
+}

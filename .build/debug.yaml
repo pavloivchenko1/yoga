@@ -1,0 +1,169 @@
+client:
+  name: basic
+tools: {}
+targets:
+  "PackageStructure": ["<PackageStructure>"]
+  "YogaKit-debug.module": ["<YogaKit-debug.module>"]
+  "YogaObjectiveC-debug.module": ["<YogaObjectiveC-debug.module>"]
+  "main": ["<YogaKit-debug.module>","<YogaObjectiveC-debug.module>","<yoga-debug.module>"]
+  "test": ["<YogaKit-debug.module>","<YogaObjectiveC-debug.module>","<yoga-debug.module>"]
+  "yoga-debug.module": ["<yoga-debug.module>"]
+default: "main"
+nodes:
+  "/Users/danieltes/Development/yoga/YogaKit/Source/":
+    is-directory-structure: true
+  "/Users/danieltes/Development/yoga/YogaKit/Source/swift/":
+    is-directory-structure: true
+  "/Users/danieltes/Development/yoga/yoga/":
+    is-directory-structure: true
+commands:
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/UIView+Yoga.m.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/YogaKit/Source/UIView+Yoga.m"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/UIView+Yoga.m.o"]
+    description: "Compiling YogaObjectiveC UIView+Yoga.m"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=YogaObjectiveC","-I","/Users/danieltes/Development/yoga/YogaKit/Source/include","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodule-map-file=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/module.modulemap","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/YogaKit/Source/YogaKit/Source","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/UIView+Yoga.m.d","-c","/Users/danieltes/Development/yoga/YogaKit/Source/UIView+Yoga.m","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/UIView+Yoga.m.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/UIView+Yoga.m.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/YGLayout.m.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/YogaKit/Source/YGLayout.m"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/YGLayout.m.o"]
+    description: "Compiling YogaObjectiveC YGLayout.m"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=YogaObjectiveC","-I","/Users/danieltes/Development/yoga/YogaKit/Source/include","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodule-map-file=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/module.modulemap","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/YogaKit/Source/YogaKit/Source","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/YGLayout.m.d","-c","/Users/danieltes/Development/yoga/YogaKit/Source/YGLayout.m","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/YGLayout.m.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/YGLayout.m.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Utils.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/Utils.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Utils.cpp.o"]
+    description: "Compiling yoga Utils.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Utils.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/Utils.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Utils.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Utils.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGConfig.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/YGConfig.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGConfig.cpp.o"]
+    description: "Compiling yoga YGConfig.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGConfig.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/YGConfig.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGConfig.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGConfig.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGEnums.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/YGEnums.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGEnums.cpp.o"]
+    description: "Compiling yoga YGEnums.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGEnums.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/YGEnums.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGEnums.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGEnums.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGLayout.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/YGLayout.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGLayout.cpp.o"]
+    description: "Compiling yoga YGLayout.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGLayout.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/YGLayout.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGLayout.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGLayout.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNode.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/YGNode.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNode.cpp.o"]
+    description: "Compiling yoga YGNode.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNode.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/YGNode.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNode.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNode.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNodePrint.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/YGNodePrint.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNodePrint.cpp.o"]
+    description: "Compiling yoga YGNodePrint.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNodePrint.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/YGNodePrint.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNodePrint.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNodePrint.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGStyle.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/YGStyle.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGStyle.cpp.o"]
+    description: "Compiling yoga YGStyle.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGStyle.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/YGStyle.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGStyle.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGStyle.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGValue.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/YGValue.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGValue.cpp.o"]
+    description: "Compiling yoga YGValue.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGValue.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/YGValue.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGValue.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGValue.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Yoga.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/Yoga.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Yoga.cpp.o"]
+    description: "Compiling yoga Yoga.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Yoga.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/Yoga.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Yoga.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Yoga.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/event/event.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/event/event.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/event/event.cpp.o"]
+    description: "Compiling yoga event/event.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/event/event.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/event/event.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/event/event.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/event/event.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/internal/experiments.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/internal/experiments.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/internal/experiments.cpp.o"]
+    description: "Compiling yoga internal/experiments.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/internal/experiments.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/internal/experiments.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/internal/experiments.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/internal/experiments.cpp.d"
+
+  "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/log.cpp.o":
+    tool: clang
+    inputs: ["/Users/danieltes/Development/yoga/yoga/log.cpp"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/log.cpp.o"]
+    description: "Compiling yoga log.cpp"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=yoga","-I","/Users/danieltes/Development/yoga/yoga/include","-fmodules-cache-path=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-I/Users/danieltes/Development/yoga/yoga/yoga","-MD","-MT","dependencies","-MF","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/log.cpp.d","-std=c++14","-c","/Users/danieltes/Development/yoga/yoga/log.cpp","-o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/log.cpp.o"]
+    deps: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/log.cpp.d"
+
+  "<YogaKit-debug.module>":
+    tool: phony
+    inputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.build/Exports.swift.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.build/YGLayoutExtensions.swift.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.swiftmodule"]
+    outputs: ["<YogaKit-debug.module>"]
+
+  "<YogaObjectiveC-debug.module>":
+    tool: phony
+    inputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/UIView+Yoga.m.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/YGLayout.m.o"]
+    outputs: ["<YogaObjectiveC-debug.module>"]
+
+  "<yoga-debug.module>":
+    tool: phony
+    inputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Utils.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGConfig.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGEnums.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGLayout.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNode.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGNodePrint.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGStyle.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/YGValue.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/Yoga.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/event/event.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/internal/experiments.cpp.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/log.cpp.o"]
+    outputs: ["<yoga-debug.module>"]
+
+  "C.YogaKit-debug.module":
+    tool: swift-compiler
+    inputs: ["/Users/danieltes/Development/yoga/YogaKit/Source/swift/Exports.swift","/Users/danieltes/Development/yoga/YogaKit/Source/swift/YGLayoutExtensions.swift","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/UIView+Yoga.m.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/YGLayout.m.o"]
+    outputs: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.build/Exports.swift.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.build/YGLayoutExtensions.swift.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.swiftmodule"]
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "YogaKit"
+    module-output-path: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.swiftmodule"
+    import-paths: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug"]
+    temps-path: "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.build"
+    objects: ["/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.build/Exports.swift.o","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.build/YGLayoutExtensions.swift.o"]
+    other-args: ["-target","x86_64-apple-macosx10.10","-swift-version","5","-enable-batch-mode","-index-store-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/index/store","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-Onone","-enable-testing","-g","-j8","-DSWIFT_PACKAGE","-DDEBUG","-Xcc","-fmodule-map-file=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaObjectiveC.build/module.modulemap","-I","/Users/danieltes/Development/yoga/YogaKit/Source/include","-Xcc","-fmodule-map-file=/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/yoga.build/module.modulemap","-I","/Users/danieltes/Development/yoga/yoga/include","-module-cache-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/ModuleCache","-parseable-output","-emit-objc-header","-emit-objc-header-path","/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.build/YogaKit-Swift.h","-color-diagnostics","-sdk","","-target","x86_64-apple-ios13.5-simulator"]
+    sources: ["/Users/danieltes/Development/yoga/YogaKit/Source/swift/Exports.swift","/Users/danieltes/Development/yoga/YogaKit/Source/swift/YGLayoutExtensions.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: 8
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/danieltes/Development/yoga/YogaKit/Source/","/Users/danieltes/Development/yoga/YogaKit/Source/swift/","/Users/danieltes/Development/yoga/yoga/","/Users/danieltes/Development/yoga/Package.swift","/Users/danieltes/Development/yoga/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

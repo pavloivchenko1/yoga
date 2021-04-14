@@ -1,0 +1,4 @@
+module YogaObjectiveC {
+    umbrella "/Users/danieltes/Development/yoga/YogaKit/Source/include"
+    export *
+}

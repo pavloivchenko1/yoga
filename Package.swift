@@ -9,7 +9,7 @@ let package = Package(
     .iOS(.v10)
   ],
   products: [
-    .library(name: "YogaKit", targets: ["YogaKit"])
+    .library(name: "YogaKit", type: .dynamic, targets: ["YogaKit"])
   ],
   dependencies: [
   ],

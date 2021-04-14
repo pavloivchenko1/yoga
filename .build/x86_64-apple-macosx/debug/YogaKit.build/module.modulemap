@@ -1,0 +1,4 @@
+module YogaKit {
+    header "/Users/danieltes/Development/yoga/.build/x86_64-apple-macosx/debug/YogaKit.build/YogaKit-Swift.h"
+    requires objc
+}
