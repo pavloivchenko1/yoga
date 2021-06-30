@@ -11,3 +11,4 @@ project(':yoga:proguard-annotations').projectDir = file('java/proguard-annotatio
 project(':yoga-layout').projectDir = file('android')
 project(':libfb').projectDir = file('lib/fb')
 project(':testutil').projectDir = file('testutil')
+include ':swingengine'
