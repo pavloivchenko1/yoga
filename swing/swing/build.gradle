@@ -1,5 +1,67 @@
 apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'cpp'
 
-dependencies {
-    testImplementation 'junit:junit:4.+'
+mainClassName = 'HelloWorld'
+
+repositories {
+  mavenCentral()
 }
+dependencies {
+  testCompile('junit:junit:4.12')
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+test {
+  systemProperty "java.library.path", file("${buildDir}/libs/borracha3/shared").absolutePath
+}
+
+model {
+  platforms {
+    x64 {
+      architecture "x64"
+    }
+  }
+
+  components {
+    yoga(NativeLibrarySpec) {
+      binaries.all {
+
+        if (targetPlatform.operatingSystem.macOsX) {
+          cppCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
+          cppCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/darwin"
+          cppCompiler.args '-I', "${rootProject.projectDir}/.."
+          cppCompiler.args '-fPIC'
+//          cppCompiler.args '-mmacosx-version-min=10.9'
+          cppCompiler.args '-stdlib=libc++'
+          cppCompiler.args '-fno-omit-frame-pointer'
+          cppCompiler.args '-fexceptions'
+          cppCompiler.args '-fvisibility=hidden'
+          cppCompiler.args '-ffunction-sections'
+          cppCompiler.args '-fdata-sections'
+          cppCompiler.args '-Wall'
+          cppCompiler.args '-std=c++11'
+
+//          linker.args '-mmacosx-version-min=10.9'
+          linker.args '-Wl'
+//          linker.args '--gc-sections'
+        } else if (targetPlatform.operatingSystem.linux) {
+          cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
+          cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/linux"
+          cCompiler.args '-D_FILE_OFFSET_BITS=64'
+        } else if (targetPlatform.operatingSystem.windows) {
+          cCompiler.args "-I${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
+          cCompiler.args "-I${org.gradle.internal.jvm.Jvm.current().javaHome}/include/win32"
+          linker.args "Shlwapi.lib", "Advapi32.lib"
+        } else if (targetPlatform.operatingSystem.freeBSD) {
+          cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
+          cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/freebsd"
+        }
+      }
+    }
+  }
+}
+
+test.dependsOn  'yogaSharedLibrary'
