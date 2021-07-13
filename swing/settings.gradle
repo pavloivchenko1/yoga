@@ -1,1 +1,1 @@
-include ':yogacore', ':swing'
+include ':yogacore', ':java'

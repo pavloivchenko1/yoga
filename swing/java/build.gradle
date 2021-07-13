@@ -1,0 +1,36 @@
+apply plugin: 'java'
+//apply plugin: 'application'
+//apply plugin: 'cpp'
+
+//mainClassName = 'HelloWorld'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'com.google.code.findbugs:jsr305:3.0.2'
+  implementation 'org.scijava:native-lib-loader:2.3.5'
+  testImplementation 'junit:junit:4.13.2'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+  main{
+    java {
+      srcDir 'src/main/java'
+    }
+  }
+  test {
+    java {
+      srcDir 'src/test/java'
+    }
+  }
+}
+
+test {
+  //TODO fix for other platforms
+  systemProperty "java.library.path", file("${buildDir}/resources/main/natives/windows_64").absolutePath
+}
