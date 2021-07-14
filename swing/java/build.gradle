@@ -22,6 +22,10 @@ sourceSets {
     java {
       srcDir 'src/main/java'
     }
+
+    resources {
+      srcDirs "src/main/resources"
+    }
   }
   test {
     java {
@@ -32,5 +36,5 @@ sourceSets {
 
 test {
   //TODO fix for other platforms
-  systemProperty "java.library.path", file("${buildDir}/resources/main/natives/windows_64").absolutePath
+  systemProperty "java.library.path", file("${buildDir}/resources").absolutePath
 }

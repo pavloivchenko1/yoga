@@ -7,6 +7,7 @@
 
 package com.facebook.yoga;
 
+//import br.com.zup.yoga.LibraryLoader;
 import org.scijava.nativelib.NativeLoader;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class YogaNative {
 //    System.loadLibrary("yoga");
     try {
       NativeLoader.loadLibrary("libyogacore");
+//      LibraryLoader.load(YogaNative.class,"libyogacore");
       NativeLoader.loadLibrary("libyoga");
     } catch (IOException e) {
       e.printStackTrace();
