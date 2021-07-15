@@ -12,12 +12,12 @@ set(yogacore_DIR ${CMAKE_SOURCE_DIR}/..)
 set(build_DIR ${CMAKE_SOURCE_DIR}/build)
 
 # To configure jni without NDK
-find_package(JNI REQUIRED)
-include_directories(${JNI_INCLUDE_DIRS})
+#find_package(JNI REQUIRED)
+#include_directories(${JNI_INCLUDE_DIRS})
 
-#set(yogacore_build_DIR ${build_DIR}/yogacore/${ANDROID_ABI})
+set(yogacore_build_DIR ${build_DIR}/yogacore/${ANDROID_ABI})
 #TODO point to the folder where we can find the yogacore.a file
-set(yogacore_build_DIR ${build_DIR}/yogacore_windows/)
+#set(yogacore_build_DIR ${build_DIR}/yogacore_windows/)
 
 file(MAKE_DIRECTORY ${build_DIR})
 
