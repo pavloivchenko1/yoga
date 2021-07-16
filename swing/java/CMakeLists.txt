@@ -9,9 +9,21 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 
 # configure import libs
 set(yogacore_DIR ${CMAKE_SOURCE_DIR}/../..)
+set(build_DIR ${CMAKE_SOURCE_DIR}/build)
+
+# To configure jni without NDK
+find_package(JNI REQUIRED)
+include_directories(${JNI_INCLUDE_DIRS})
+
+set(yogacore_build_DIR ${build_DIR}/yogacore)
+
 
 set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE STRING "" )
 set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE STRING "" )
+
+file(MAKE_DIRECTORY ${build_DIR})
+
+add_subdirectory(${yogacore_DIR} ${yogacore_build_DIR})
 
 add_compile_options(
     -fno-omit-frame-pointer
@@ -22,10 +34,14 @@ add_compile_options(
     -Wall
     -std=c++11)
 
-file(GLOB_RECURSE yogacore_SRC ${yogacore_DIR}/yoga/*.cpp)
-add_library(yogacore SHARED ${yogacore_SRC})
+file(GLOB jni_SRC
+        ${yogacore_DIR}/java/jni/*.cpp)
 
-target_include_directories(yogacore PUBLIC ${yogacore_DIR})
+file(GLOB yogajni_version_script
+        ${yogacore_DIR}/java/yogajni.version)
 
-target_link_libraries(yogacore)
-set_target_properties(yogacore PROPERTIES CXX_STANDARD 11)
+add_library(yoga SHARED ${jni_SRC})
+
+target_include_directories(yoga PRIVATE ${yogacore_DIR_ROOT})
+
+target_link_libraries(yoga -Wl,--gc-sections,--version-script=${yogajni_version_script} yogacore)

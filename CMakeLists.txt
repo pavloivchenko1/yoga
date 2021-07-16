@@ -5,6 +5,8 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+option(BUILD_MOBILE_LIBS "Build for mobile platform" ON) #ON by default
+
 set(CMAKE_VERBOSE_MAKEFILE on)
 
 add_compile_options(
@@ -20,6 +22,12 @@ file(GLOB_RECURSE yogacore_SRC yoga/*.cpp)
 add_library(yogacore STATIC ${yogacore_SRC})
 
 target_include_directories(yogacore PUBLIC .)
-target_link_libraries(yogacore android log)
+
+if(BUILD_MOBILE_LIBS)
+  target_link_libraries(yogacore android log)
+else()
+  target_link_libraries(yogacore)
+endif(BUILD_MOBILE_LIBS)
+unset(BUILD_MOBILE_LIBS CACHE) # <---- this is the important!!
 
 set_target_properties(yogacore PROPERTIES CXX_STANDARD 11)

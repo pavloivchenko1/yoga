@@ -1,40 +1,59 @@
-apply plugin: 'java'
-//apply plugin: 'application'
-//apply plugin: 'cpp'
+/*
+ * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-//mainClassName = 'HelloWorld'
-
-repositories {
-  mavenCentral()
+plugins {
+  id 'java'
+  id 'java-library'
 }
+
 
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
-  implementation 'org.scijava:native-lib-loader:2.3.5'
   testImplementation 'junit:junit:4.13.2'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+test {
+  useJUnitPlatform()
+}
 
 sourceSets {
-  main{
-    java {
-      srcDir 'src/main/java'
-    }
-
+  main {
     resources {
-      srcDirs "src/main/resources"
-    }
-  }
-  test {
-    java {
-      srcDir 'src/test/java'
+      srcDirs "src/main/resources", "build/natives/bin"
     }
   }
 }
 
-test {
-  //TODO fix for other platforms
-  systemProperty "java.library.path", file("${buildDir}/resources").absolutePath
+task compileJNI {
+  dependsOn compileJava
+
+  doLast {
+    //TODO understand how to make the command below work for mac, linux, etc
+    exec {
+      commandLine 'cmd', '/c', 'mkdir build\\natives & cd build\\natives && cmake -G "MinGW Makefiles" -D BUILD_MOBILE_LIBS=OFF ../.. && make'
+    }
+  }
+}
+
+
+processResources {
+  dependsOn compileJNI
+}
+
+tasks.withType(Test) {
+  systemProperty "java.library.path", "build/natives/bin"
+  testLogging.showStandardStreams = false
 }
