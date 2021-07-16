@@ -25,12 +25,16 @@ dependencies {
   testImplementation 'junit:junit:4.13.2'
 }
 
-test {
-  useJUnitPlatform()
-}
-
 sourceSets {
+  test {
+    java {
+      srcDirs "src/test/java"
+    }
+  }
   main {
+    java {
+      srcDirs "src/main/java"
+    }
     resources {
       srcDirs "src/main/resources", "build/natives/bin"
     }
@@ -56,4 +60,9 @@ processResources {
 tasks.withType(Test) {
   systemProperty "java.library.path", "build/natives/bin"
   testLogging.showStandardStreams = false
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
