@@ -33,6 +33,17 @@ class YogaParentData extends ContainerBoxParentData<RenderBox> {
   String toString() => '${super.toString()}; nodeProperties=$nodeProperties';
 }
 
+Widget _observeLayoutChanges(Widget child) {
+  //FIXME understand how to ubserve size for YogaLayout Widgets, and make them be renderized by the logic
+  if(child.toString().toLowerCase().startsWith("beaglecontainer-") ||
+      child.toString().toLowerCase().startsWith("beaglesimpleform-")) {
+    return child;
+  }
+  return MeasureSize(
+    child: child
+  );
+}
+
 /// Class responsible to measure any flutter widget by the NodeProperties.
 /// This can only be placed inside a YogaLayout widget and cannot have another
 /// YogaNode as a direct child.
@@ -40,11 +51,11 @@ class YogaParentData extends ContainerBoxParentData<RenderBox> {
 /// to calculate the layout size and the children offsets,
 /// given this wrapped widget's size.
 class YogaNode extends ParentDataWidget<YogaParentData> {
-  const YogaNode({
+  YogaNode({
     Key? key,
     required this.nodeProperties,
     required Widget child,
-  }) : super(key: key, child: child);
+  }) : super(key: key, child: _observeLayoutChanges(child));
 
   final NodeProperties nodeProperties;
 
@@ -73,6 +84,46 @@ class YogaNode extends ParentDataWidget<YogaParentData> {
     super.debugFillProperties(properties);
     properties.add(StringProperty('nodeProperties', nodeProperties.toString()));
   }
+}
+
+class MeasureSizeRenderObject extends RenderProxyBox {
+  Size oldSize = Size.zero;
+
+  @override
+  void performLayout() {
+    super.performLayout();
+
+    Size newSize = child?.size ?? Size.zero;
+    if (newSize == oldSize) return;
+
+    debugPrint("Size changed ${child} oldSize: ${oldSize.toString()} newSize: ${newSize.toString()}");
+    oldSize = newSize;
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _recalculateLayout(parent);
+    });
+  }
+
+  void _recalculateLayout(AbstractNode? targetParent) {
+    if (targetParent is RenderYoga) {
+      targetParent.nodeProperties.dirtyAllDescendants();
+      targetParent.nodeProperties.removeAllChildren();
+    }
+  }
+}
+
+class MeasureSize extends SingleChildRenderObjectWidget {
+
+  const MeasureSize({
+    Key? key,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    return MeasureSizeRenderObject();
+  }
+
 }
 
 class RenderYoga extends RenderBox
@@ -215,7 +266,10 @@ class YogaLayout extends MultiChildRenderObjectWidget {
     Key? key,
     required this.nodeProperties,
     List<Widget> children = const <Widget>[],
-  }) : super(key: key, children: children);
+  }) : super(key: key,
+      children: children,
+      // children: children.map((child) => _observeLayoutChanges(child)).toList()
+  );
 
   final NodeProperties nodeProperties;
 
