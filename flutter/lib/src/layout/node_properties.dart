@@ -383,4 +383,8 @@ class NodeProperties {
   void dirtyAllDescendants() {
     _mapper.yGNodeMarkDirtyAndPropagateToDescendants(_node);
   }
+
+  bool isDirty() {
+    return _mapper.yGNodeIsDirty(_node);
+  }
 }
