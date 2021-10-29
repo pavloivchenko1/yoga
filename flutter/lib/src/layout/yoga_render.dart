@@ -206,8 +206,8 @@ class RenderYoga extends RenderBox
     final children = renderYoga.getChildrenAsList();
     for (var i = 0; i < children.length; i++) {
       var child = children[i];
-      if (child is MeasureSizeRenderObject && child.child is RenderYoga) {
-        child = (child).child!;
+      if (child is MeasureSizeRenderObject && child.child is MeasureSizeRenderObject && (child.child as MeasureSizeRenderObject).child is RenderYoga) {
+        child = (child.child as MeasureSizeRenderObject).child!;
       }
 
       if (child is RenderYoga) {
@@ -239,9 +239,9 @@ class RenderYoga extends RenderBox
       var child = children[i];
       RenderBox? originalChild = null;
       final yogaParentData = child.parentData as YogaParentData;
-      if (child is MeasureSizeRenderObject && child.child is RenderYoga) {
+      if (child is MeasureSizeRenderObject && child.child is MeasureSizeRenderObject && (child.child as MeasureSizeRenderObject).child is RenderYoga) {
         originalChild = child;
-        child = (child).child!;
+        child = (child.child as MeasureSizeRenderObject).child!;
       }
 
       late Pointer<YGNode> node;
