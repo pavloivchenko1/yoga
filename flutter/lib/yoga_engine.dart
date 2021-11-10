@@ -17,5 +17,5 @@
 export 'package:yoga_engine/src/yoga_initializer.dart' show Yoga;
 export 'package:yoga_engine/src/layout/node_properties.dart';
 export 'package:yoga_engine/src/layout/yoga_render.dart'
-    show YogaNode, YogaLayout;
+    show YogaNode, YogaLayout, YogaMetadataWidget, MeasureSize;
 export 'package:yoga_engine/src/ffi/types.dart';
