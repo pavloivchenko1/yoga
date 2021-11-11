@@ -16,81 +16,127 @@
 
 import 'package:flutter/material.dart';
 import 'package:yoga_engine/yoga_engine.dart';
-
 void main() {
-  Yoga.init();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    NodeProperties child1 = NodeProperties();
-
-    NodeProperties child2 = NodeProperties();
-
-    NodeProperties child3 = NodeProperties();
-    child3.setFlexDirection(YGFlexDirection.YGFlexDirectionRow);
-    child3.setHeight(100);
-
-    NodeProperties child4 = NodeProperties();
-    child4.setHeight(50);
-
-    NodeProperties root = NodeProperties();
-    root.setWidth(300);
-    root.setHeight(300);
-    root.setFlexDirection(YGFlexDirection.YGFlexDirectionRow);
-    root.setAlignItems(YGAlign.YGAlignCenter);
-
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<MyHomePage> {
+  _MyHomePageState() {
+    Yoga.init();
+    _firstYogaLayoutProperties = NodeProperties();
+    _lastYogaLayoutProperties = NodeProperties();
+    _firstYogaNodeProperties = NodeProperties();
+    _lastYogaNodeProperties = NodeProperties();
+    _firstYogaLayoutProperties.setPadding(YGEdge.YGEdgeTop, 40);
+  }
+  int _counter = 1;
+  double _size = 20;
+  late NodeProperties _firstYogaLayoutProperties;
+  late NodeProperties _lastYogaLayoutProperties;
+  late NodeProperties _firstYogaNodeProperties;
+  late NodeProperties _lastYogaNodeProperties;
+  List<Widget> _buildLines() {
+    final List<Widget> lines = [];
+    for (int i = 1; i <= _counter; i++) {
+      lines.add(Text('Line $i', key: Key('$i')));
+    }
+    return lines;
+  }
+  Widget _buildLinesExample() {
+    return Column(
+      children: [
+        ..._buildLines(),
+        ElevatedButton(
+          child: const Text('Add one more line'),
+          onPressed: () => setState(() {
+            _counter++;
+          }),
+        )
+      ],
+    );
+  }
+  Widget _buildImageExample() {
+    return Image.network('https://mcdn.wallpapersafari.com/medium/8/37/zlwnoM.jpg');
+  }
+  // VERY, VERY WEIRD
+  Widget _buildRectangleExample() {
+    return GestureDetector(
+      onTap: () => setState(() {
+        _size *= 2;
+      }),
+      child: SizedBox.square(
+        dimension: _size,
+        child: const DecoratedBox(
+          decoration: BoxDecoration(color: Colors.red),
         ),
-        body: ColoredBox(
-          color: Colors.orange,
+      ),
+    );
+  }
+  Widget _buildTextExample() {
+    return GestureDetector(
+      onTap: () => setState(() {
+        _size *= 1.2;
+      }),
+      child: Text('Click to enlarge', style: TextStyle(fontSize: _size, backgroundColor: Colors.white)),
+    );
+  }
+  Widget _buildDoubleYoga(Widget child) {
+    return YogaLayout(
+      nodeProperties: _firstYogaLayoutProperties,
+      children: [
+        YogaNode(
+          nodeProperties: _firstYogaNodeProperties,
           child: YogaLayout(
-            nodeProperties: root,
+            nodeProperties: _lastYogaLayoutProperties,
             children: [
               YogaNode(
-                nodeProperties: child1,
-                child: ColoredBox(
-                  color: Colors.yellow,
-                  child: Text('Child 1'),
-                ),
-              ),
-              YogaNode(
-                nodeProperties: child2,
-                child: ColoredBox(
-                  color: Colors.pink,
-                  child: YogaLayout(
-                    nodeProperties: child3,
-                    children: [
-                      YogaNode(
-                        nodeProperties: child4,
-                        child: ColoredBox(
-                          color: Colors.cyan,
-                          child: Text('Child 2'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                nodeProperties: _lastYogaNodeProperties,
+                child: child,
               ),
             ],
           ),
         ),
-      ),
+      ],
+    );
+  }
+  Widget _buildYoga(Widget child) {
+    return YogaLayout(
+      nodeProperties: _firstYogaLayoutProperties,
+      children: [
+        YogaNode(
+          nodeProperties: _lastYogaNodeProperties,
+          child: child,
+        ),
+      ],
+    );
+  }
+  Widget _buildFlex(Widget child) {
+    return Row(children: [child]);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(child: _buildDoubleYoga(_buildTextExample())),
+      backgroundColor: Colors.orangeAccent,
     );
   }
 }

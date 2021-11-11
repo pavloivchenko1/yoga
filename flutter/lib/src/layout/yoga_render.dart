@@ -45,40 +45,12 @@ Widget _observeLayoutChanges(Widget child) {
 /// Use this class to wrap around any flutter widget. The yoga will be able
 /// to calculate the layout size and the children offsets,
 /// given this wrapped widget's size.
-class YogaNode extends ParentDataWidget<YogaParentData> {
+class YogaNode extends MetaData {
   YogaNode({
-    Key? key,
-    required this.nodeProperties,
+    required nodeProperties,
     required Widget child,
-  }) : super(key: key, child: _observeLayoutChanges(child));
+  }) : super(child: _observeLayoutChanges(child), metaData: nodeProperties);
 
-  final NodeProperties nodeProperties;
-
-  @override
-  void applyParentData(RenderObject renderObject) {
-    assert(renderObject.parentData is YogaParentData);
-    final parentData = renderObject.parentData! as YogaParentData;
-    bool needsLayout = false;
-
-    if (parentData.nodeProperties != nodeProperties) {
-      parentData.nodeProperties = nodeProperties;
-      needsLayout = true;
-    }
-
-    if (needsLayout) {
-      final AbstractNode? targetParent = renderObject.parent;
-      if (targetParent is RenderObject) targetParent.markNeedsLayout();
-    }
-  }
-
-  @override
-  Type get debugTypicalAncestorWidgetClass => YogaLayout;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('nodeProperties', nodeProperties.toString()));
-  }
 }
 
 class MeasureSizeRenderObject extends RenderProxyBox {
@@ -101,9 +73,12 @@ class MeasureSizeRenderObject extends RenderProxyBox {
 
   void _recalculateLayout(AbstractNode? targetParent) {
     if (targetParent is RenderYoga) {
-      //FIXME Trigger rebuild if we have more than one container ancestor. example Container(container( image) ) )
         targetParent.nodeProperties.dirtyAllDescendants();
         targetParent.nodeProperties.removeAllChildren();
+    }
+
+    if(targetParent?.parent != null) {
+      _recalculateLayout(targetParent?.parent);
     }
   }
 }
@@ -200,6 +175,10 @@ class RenderYoga extends RenderBox
       if (child is RenderYoga) {
         renderYoga.nodeProperties.insertChildAt(child.nodeProperties, i);
         _attachNodesFromWidgetsHierarchy(child);
+      } else if(child is RenderMetaData) {
+        final childYogaNode = child.metaData as NodeProperties;
+        renderYoga.nodeProperties.insertChildAt(childYogaNode, i);
+        _setMeasureFunction(child, childYogaNode);
       } else {
         final yogaParentData = child.parentData as YogaParentData;
         assert(() {
@@ -224,7 +203,7 @@ class RenderYoga extends RenderBox
   void _applyLayoutToWidgetsHierarchy(List<RenderBox> children) {
     for (var i = 0; i < children.length; i++) {
       var child = children[i];
-      RenderBox? originalChild = null;
+      RenderBox? originalChild;
       final yogaParentData = child.parentData as YogaParentData;
       if (child is MeasureSizeRenderObject && child.child is RenderYoga) {
         originalChild = child;
@@ -234,6 +213,8 @@ class RenderYoga extends RenderBox
       late Pointer<YGNode> node;
       if (child is RenderYoga) {
         node = child.nodeProperties.node;
+      } else if(child is RenderMetaData) {
+        node = (child.metaData as NodeProperties).node;
       } else {
         node = _getNodeProperties(yogaParentData).node;
       }
