@@ -47,7 +47,7 @@ Widget _observeLayoutChanges(Widget child) {
 /// given this wrapped widget's size.
 class YogaNode extends MetaData {
   YogaNode({
-    required nodeProperties,
+    required NodeProperties nodeProperties,
     required Widget child,
   }) : super(child: _observeLayoutChanges(child), metaData: nodeProperties);
 
