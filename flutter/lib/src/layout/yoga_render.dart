@@ -168,7 +168,7 @@ class RenderYoga extends RenderBox
     final children = renderYoga.getChildrenAsList();
     for (var i = 0; i < children.length; i++) {
       var child = children[i];
-      if (child is MeasureSizeRenderObject && child.child is RenderYoga) {
+      if (child is MeasureSizeRenderObject) {
         child = child.child!;
       }
 
@@ -205,7 +205,7 @@ class RenderYoga extends RenderBox
       var child = children[i];
       RenderBox? originalChild;
       final yogaParentData = child.parentData as YogaParentData;
-      if (child is MeasureSizeRenderObject && child.child is RenderYoga) {
+      if (child is MeasureSizeRenderObject) {
         originalChild = child;
         child = child.child!;
       }
