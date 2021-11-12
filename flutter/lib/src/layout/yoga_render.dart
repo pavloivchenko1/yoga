@@ -168,30 +168,38 @@ class RenderYoga extends RenderBox
     final children = renderYoga.getChildrenAsList();
     for (var i = 0; i < children.length; i++) {
       var child = children[i];
-      if (child is MeasureSizeRenderObject) {
-        child = child.child!;
+      NodeProperties? childYogaNode;
+      RenderBox? measureSizeRenderBox;
+      if(child is RenderMetaData) {
+        childYogaNode = (child.metaData as NodeProperties);
+        if(child.child is MeasureSizeRenderObject) {
+          measureSizeRenderBox = child.child;
+          if ((child.child as MeasureSizeRenderObject).child is RenderYoga) {
+            renderYoga.nodeProperties.insertChildAt(
+                ((child.child as MeasureSizeRenderObject).child as RenderYoga).nodeProperties, i);
+            _attachNodesFromWidgetsHierarchy((child.child as MeasureSizeRenderObject).child as RenderYoga);
+          } else {
+            renderYoga.nodeProperties.insertChildAt(childYogaNode, i);
+            _setMeasureFunction(child, childYogaNode);
+          }
+        }
       }
 
-      if (child is RenderYoga) {
-        renderYoga.nodeProperties.insertChildAt(child.nodeProperties, i);
-        _attachNodesFromWidgetsHierarchy(child);
-      } else if(child is RenderMetaData) {
-        final childYogaNode = child.metaData as NodeProperties;
-        renderYoga.nodeProperties.insertChildAt(childYogaNode, i);
-        _setMeasureFunction(child, childYogaNode);
-      } else {
-        final yogaParentData = child.parentData as YogaParentData;
-        assert(() {
-          if (yogaParentData.nodeProperties != null) {
-            return true;
-          }
-          throw FlutterError('To use YogaLayout, you must declare every child '
-              'inside a YogaNode or YogaLayout component');
-        }());
-        final childYogaNode = _getNodeProperties(yogaParentData);
-        renderYoga.nodeProperties.insertChildAt(childYogaNode, i);
-        _setMeasureFunction(child, childYogaNode);
-      }
+
+
+      // else {
+      //   final yogaParentData = child.parentData as YogaParentData;
+      //   assert(() {
+      //     if (yogaParentData.nodeProperties != null) {
+      //       return true;
+      //     }
+      //     throw FlutterError('To use YogaLayout, you must declare every child '
+      //         'inside a YogaNode or YogaLayout component');
+      //   }());
+      //   final childYogaNode = _getNodeProperties(yogaParentData);
+      //   renderYoga.nodeProperties.insertChildAt(childYogaNode, i);
+      //   _setMeasureFunction(child, childYogaNode);
+      // }
     }
   }
 
@@ -203,23 +211,24 @@ class RenderYoga extends RenderBox
   void _applyLayoutToWidgetsHierarchy(List<RenderBox> children) {
     for (var i = 0; i < children.length; i++) {
       var child = children[i];
-      RenderBox? originalChild;
+      RenderBox? measureSizeRenderBox;
       final yogaParentData = child.parentData as YogaParentData;
-      if (child is MeasureSizeRenderObject) {
-        originalChild = child;
-        child = child.child!;
+      Pointer<YGNode>? node;
+
+      if(child is RenderMetaData) {
+        if(child.child is MeasureSizeRenderObject) {
+          measureSizeRenderBox = child.child;
+
+          if ((child.child as MeasureSizeRenderObject).child is RenderYoga) {
+            node = ((child.child as MeasureSizeRenderObject).child as RenderYoga).nodeProperties.node;
+          } else {
+            node = (child.metaData as NodeProperties).node;
+          }
+        }
       }
 
-      late Pointer<YGNode> node;
-      if (child is RenderYoga) {
-        node = child.nodeProperties.node;
-      } else if(child is RenderMetaData) {
-        node = (child.metaData as NodeProperties).node;
-      } else {
-        node = _getNodeProperties(yogaParentData).node;
-      }
       yogaParentData.offset = Offset(
-        _helper.getLeft(node),
+        _helper.getLeft(node!),
         _helper.getTop(node),
       );
       late BoxConstraints childConstraints;
@@ -230,11 +239,11 @@ class RenderYoga extends RenderBox
         ),
       );
 
-      if(originalChild != null) {
-        originalChild.layout(childConstraints, parentUsesSize: true);
-      } else {
+      // if(measureSizeRenderBox != null) {
+      //   measureSizeRenderBox.layout(childConstraints, parentUsesSize: true);
+      // } else {
         child.layout(childConstraints, parentUsesSize: true);
-      }
+      // }
       _helper.removeNodeReference(node);
     }
   }
