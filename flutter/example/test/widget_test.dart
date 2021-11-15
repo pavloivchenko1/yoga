@@ -21,7 +21,7 @@ import 'package:yoga_engine_example/main.dart';
 
 void main() {
   testWidgets('Verify example', (WidgetTester tester) async {
-    Yoga.init();
+    YogaWidget.init();
     await tester.pumpWidget(MyApp());
 
     expect(

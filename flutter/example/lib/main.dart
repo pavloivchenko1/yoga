@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:yoga_engine/yoga_engine.dart';
 
 void main() {
-  Yoga.init();
+  YogaWidget.init();
   runApp(MyApp());
 }
 
@@ -62,21 +62,21 @@ class _MyAppState extends State<MyApp> {
           child: YogaLayout(
             nodeProperties: root,
             children: [
-              YogaNode(
+              YogaWidget(
                 nodeProperties: child1,
                 child: ColoredBox(
                   color: Colors.yellow,
                   child: Text('Child 1'),
                 ),
               ),
-              YogaNode(
+              YogaWidget(
                 nodeProperties: child2,
                 child: ColoredBox(
                   color: Colors.pink,
                   child: YogaLayout(
                     nodeProperties: child3,
                     children: [
-                      YogaNode(
+                      YogaWidget(
                         nodeProperties: child4,
                         child: ColoredBox(
                           color: Colors.cyan,

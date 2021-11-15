@@ -21,6 +21,16 @@ import 'package:yoga_engine/src/ffi/types.dart';
 import 'package:yoga_engine/src/utils/methods.dart';
 import 'package:yoga_engine/src/yoga_initializer.dart';
 
+final Map<Pointer<YGNode>, YGSize> _sizeMap = {};
+
+YGSize _measureSize(
+  Pointer<YGNode> node,
+  double width,
+  int widthMode,
+  double height,
+  int heightMode,
+) => _sizeMap[node]!;
+
 /// Class responsible to holder the pointer to YGNode used in yoga core.
 /// This also expose all methods needed to configure the yoga params.
 class NodeProperties {
@@ -75,6 +85,13 @@ class NodeProperties {
 
   void setMeasureFunc() {
     _mapper.yGNodeSetMeasureFunc(_node, Pointer.fromFunction(measureFunc));
+  }
+
+  void setOwnSize(double width, double height) {
+    _sizeMap[_node] = _mapper.yGCreateSize(width, height);
+    if (!hasMeasureFunc()) {
+      _mapper.yGNodeSetMeasureFunc(_node, Pointer.fromFunction(_measureSize));
+    }
   }
 
   void setDirection(YGDirection direction) {

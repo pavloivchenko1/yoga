@@ -19,3 +19,4 @@ export 'package:yoga_engine/src/layout/node_properties.dart';
 export 'package:yoga_engine/src/layout/yoga_render.dart'
     show YogaNode, YogaLayout;
 export 'package:yoga_engine/src/ffi/types.dart';
+export 'package:yoga_engine/src/layout/yoga_new.dart';
