@@ -172,7 +172,16 @@ class YogaWidgetState extends State<YogaWidget> {
   @override
   void initState() {
     _parent = context.findAncestorStateOfType<YogaWidgetState>();
-    if (_parent != null) _parent!.setChild(this);
+    if (!widget.properties.isCalculated()) {
+      if (_parent != null) _parent!.setChild(this);
+    } else {
+      yogaResult = YogaResult(
+        width: widget.properties.getLayoutWidth(),
+        height: widget.properties.getLayoutHeight(),
+        top: widget.properties.getTop(),
+        left: widget.properties.getLeft(),
+      );
+    }
     super.initState();
   }
 
