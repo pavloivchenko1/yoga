@@ -20,6 +20,7 @@ import 'dart:math';
 
 import 'package:flutter/rendering.dart';
 import 'package:yoga_engine/src/ffi/mapper.dart';
+import 'package:yoga_engine/src/ffi/types.dart';
 
 import '../../yoga_engine.dart';
 import '../yoga_initializer.dart';

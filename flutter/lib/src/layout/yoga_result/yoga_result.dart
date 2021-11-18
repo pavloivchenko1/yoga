@@ -14,7 +14,20 @@
  * limitations under the License.
  */
 
-export 'package:yoga_engine/src/yoga_initializer.dart' show Yoga;
-export 'package:yoga_engine/src/layout/yoga_widget.dart';
-export 'package:yoga_engine/src/layout/yoga_style.dart';
-export 'package:yoga_engine/src/layout/measurable_widget.dart';
+class YogaResult {
+  const YogaResult({
+    required this.width,
+    required this.height,
+    required this.top,
+    required this.left,
+    required this.isFixedWidth,
+    required this.isFixedHeight,
+  });
+
+  final double width;
+  final double height;
+  final double top;
+  final double left;
+  final bool isFixedWidth;
+  final bool isFixedHeight;
+}
