@@ -35,7 +35,7 @@ class YogaParentData extends ContainerBoxParentData<RenderBox> {
 
 /// Class responsible to measure any flutter widget by the NodeProperties.
 /// This can only be placed inside a YogaLayout widget and cannot have another
-/// YogaNode as a direct child.
+/// flut as a direct child.
 /// Use this class to wrap around any flutter widget. The yoga will be able
 /// to calculate the layout size and the children offsets,
 /// given this wrapped widget's size.

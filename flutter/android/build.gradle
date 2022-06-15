@@ -35,23 +35,38 @@ rootProject.allprojects {
     google()
     mavenCentral()
   }
-  afterEvaluate {
-    project.tasks.preBuild {
-      dependsOn "copyDependencies"
-    }
-    project.tasks.clean {
-      dependsOn "deleteDependencies"
-    }
-    project.tasks.register('copyDependencies', Copy) {
-      println("Build dir yoga $buildDir")
-      from '../../yoga'
-      into "$buildDir/../deps/yoga"
-    }
-    project.tasks.register('deleteDependencies', Delete) {
-      delete "$buildDir/../deps"
-    }
+
+//
+//  afterEvaluate {
+//    project.tasks.build {
+//      dependsOn("PrepareYoga")
+//    }
+//
+////    project.tasks.preBuild {
+////      dependsOn "copyDependencies"
+////    }
+////    project.tasks.clean {
+////      dependsOn "deleteDependencies"
+////    }
+////    project.tasks.register('copyDependencies', Copy) {
+////      println("Build dir yoga $buildDir")
+////      from '../../yoga'
+////      into "$buildDir/../deps/yoga"
+////    }
+////    project.tasks.register('deleteDependencies', Delete) {
+////      delete "$buildDir/../deps"
+////    }
+//  }
+}
+
+tasks.create("PrepareYoga") {
+  doLast {
+    println("Build dir yoga $buildDir")
+    from '../../yoga'
+    into "$buildDir/../deps/yoga"
   }
 }
+
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
