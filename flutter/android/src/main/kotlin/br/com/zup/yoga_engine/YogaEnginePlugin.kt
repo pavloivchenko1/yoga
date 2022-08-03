@@ -16,6 +16,7 @@
 
 package br.com.zup.yoga_engine
 
+import android.os.Build
 import androidx.annotation.NonNull
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -26,6 +27,14 @@ import io.flutter.plugin.common.MethodChannel.Result
 
 /** YogaEnginePlugin */
 class YogaEnginePlugin: FlutterPlugin, MethodCallHandler {
+
+  init {
+     // https://github.com/flutter/flutter/issues/73318#issuecomment-754598119
+     if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+       System.loadLibrary("yogacore")
+     }
+   }
+
   /// The MethodChannel that will the communication between Flutter and native Android
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
