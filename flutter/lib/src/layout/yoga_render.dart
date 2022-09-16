@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import 'dart:ffi';
+import 'dart:ffi' hide Size;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';

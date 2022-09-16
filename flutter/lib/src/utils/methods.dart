@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import 'dart:ffi';
+import 'dart:ffi' hide Size;
 import 'dart:io';
 import 'dart:math';
 
