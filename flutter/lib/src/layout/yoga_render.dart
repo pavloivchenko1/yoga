@@ -129,9 +129,7 @@ class RenderYoga extends RenderBox
       final maxWidth = constraints.maxWidth.isInfinite
           ? YGUndefined
           : constraints.maxWidth.floorToDouble();
-      final maxHeight = constraints.maxHeight.isInfinite
-          ? YGUndefined
-          : constraints.maxHeight.floorToDouble();
+      final maxHeight = YGUndefined;
       nodeProperties.calculateLayout(maxWidth, maxHeight);
     }
     _applyLayoutToWidgetsHierarchy(getChildrenAsList());
@@ -142,11 +140,38 @@ class RenderYoga extends RenderBox
     );
   }
 
+  void recalculateLayout() {
+    nodeProperties.dirtyAllDescendants();
+    nodeProperties.removeAllChildren();
+    AbstractNode? yogaChild = firstChild;
+    while (yogaChild != null) {
+      if (yogaChild is RenderYoga) {
+        yogaChild.nodeProperties.dirtyAllDescendants();
+        yogaChild.nodeProperties.removeAllChildren();
+      }
+      if (yogaChild is RenderBox) {
+        yogaChild = childAfter(yogaChild);
+      } else {
+        yogaChild = null;
+      }
+    }
+    if (parent is RenderYoga) {
+      (parent as RenderYoga).recalculateLayout();
+    } else {
+      markNeedsLayout();
+    }
+  }
+
   void _attachNodesFromWidgetsHierarchy(RenderYoga renderYoga) {
     final children = renderYoga.getChildrenAsList();
     for (var i = 0; i < children.length; i++) {
       final child = children[i];
       if (child is RenderYoga) {
+        final oldOwner = child.nodeProperties.getOwner();
+        final newOwner = renderYoga.nodeProperties.node;
+        if (oldOwner == newOwner) {
+          continue;
+        }
         renderYoga.nodeProperties.insertChildAt(child.nodeProperties, i);
         _attachNodesFromWidgetsHierarchy(child);
       } else {
@@ -159,6 +184,11 @@ class RenderYoga extends RenderBox
               'inside a YogaNode or YogaLayout component');
         }());
         final childYogaNode = _getNodeProperties(yogaParentData);
+        final oldOwner = childYogaNode.getOwner();
+        final newOwner = renderYoga.nodeProperties.node;
+        if (oldOwner.address == newOwner.address) {
+          continue;
+        }
         renderYoga.nodeProperties.insertChildAt(childYogaNode, i);
         _setMeasureFunction(child, childYogaNode);
       }
@@ -171,28 +201,55 @@ class RenderYoga extends RenderBox
   }
 
   void _applyLayoutToWidgetsHierarchy(List<RenderBox> children) {
+    var totalHeight = 0.0;
     for (var i = 0; i < children.length; i++) {
       final child = children[i];
       final yogaParentData = child.parentData as YogaParentData;
-      late Pointer<YGNode> node;
+      late NodeProperties nodeProperties;
       if (child is RenderYoga) {
-        node = child.nodeProperties.node;
+        nodeProperties = child.nodeProperties;
       } else {
-        node = _getNodeProperties(yogaParentData).node;
+        nodeProperties = _getNodeProperties(yogaParentData);
       }
+
+      if (!nodeProperties.isCalculated()) {
+        final maxWidth = constraints.maxWidth.isInfinite
+            ? YGUndefined
+            : constraints.maxWidth.floorToDouble();
+        final maxHeight = YGUndefined;
+        nodeProperties.calculateLayout(maxWidth, maxHeight);
+      }
+
+      final node = nodeProperties.node;
+
       yogaParentData.offset = Offset(
         _helper.getLeft(node),
         _helper.getTop(node),
       );
+      final layoutWidth = _helper.getLayoutWidth(node);
+      final layoutHeight = _helper.getLayoutHeight(node);
       late BoxConstraints childConstraints;
       childConstraints = BoxConstraints.tight(
         Size(
-          _helper.getLayoutWidth(node),
-          _helper.getLayoutHeight(node),
+          layoutWidth,
+          layoutHeight,
         ),
       );
+
       child.layout(childConstraints, parentUsesSize: true);
+      if (child.hasSize) {
+        totalHeight += child.size.height;
+      }
+
       _helper.removeNodeReference(node);
+    }
+    if (hasSize && totalHeight != size.height) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        if (parent is RenderYoga) {
+          final parentObject = parent as RenderYoga;
+          parentObject.recalculateLayout();
+        }
+      });
     }
   }
 

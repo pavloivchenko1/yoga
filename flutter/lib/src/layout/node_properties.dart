@@ -371,6 +371,19 @@ class NodeProperties {
 
   bool isCalculated() {
     return !_mapper.yGNodeLayoutGetWidth(_node).isNaN &&
-        !_mapper.yGNodeLayoutGetHeight(_node).isNaN;
+        !_mapper.yGNodeLayoutGetHeight(_node).isNaN &&
+        !_mapper.yGNodeIsDirty(_node);
+  }
+
+  void removeAllChildren() {
+    _mapper.yGNodeRemoveAllChildren(node);
+  }
+
+  void dirtyAllDescendants() {
+    _mapper.yGNodeMarkDirtyAndPropagateToDescendants(_node);
+  }
+
+  bool isDirty() {
+    return _mapper.yGNodeIsDirty(_node);
   }
 }
